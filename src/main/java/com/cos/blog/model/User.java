@@ -29,7 +29,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 db의 넘버링 전략을 따라감
 	private int id;//auto_increment로 넘버링
 	
-	@Column(nullable = false, length =30,unique =true)
+	@Column(nullable = false, length =100,unique =true)
 	private String username; //아이디
 	
 	@Column(nullable = false, length = 100)
@@ -40,6 +40,8 @@ public class User {
 	
 	@Enumerated(EnumType.STRING)
 	private RoleType role; //타입강제지정 ,DB는 RoleType이란게 없다. 따라서 해당 enum이 String 이라고 알려줘야함
+	
+	private String oauth; //로그인포맷 구분
 	
 	@CreationTimestamp //시간자동입력
 	private Timestamp createDate;

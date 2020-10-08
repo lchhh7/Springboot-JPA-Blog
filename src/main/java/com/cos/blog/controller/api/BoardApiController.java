@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.config.auth.PrincipalDetail;
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.dto.ResponseDTO;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.service.BoardService;
 
 @RestController
@@ -35,6 +37,19 @@ public class BoardApiController {
 	@PutMapping("api/board/{id}")
 	public ResponseDTO<Integer> update(@PathVariable int id,@RequestBody Board board){
 		boardService.contentUpdate(id,board);
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(),1);
+	}
+	
+	//데이터를 받을때 컨트롤러에서 dto를 만들어서 받는게 좋다
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDTO<Integer> replysave(@RequestBody ReplySaveRequestDto replySaveRequestDto) {
+		boardService.replyWrite(replySaveRequestDto);
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(),1); //자바오브젝트를 json으로 변환해서 리턴(jackson)
+	}
+	
+	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+	public ResponseDTO<Integer> replyDelete(@PathVariable int replyId){
+		boardService.replyDelete(replyId);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(),1);
 	}
 }

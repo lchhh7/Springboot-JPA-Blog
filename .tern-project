@@ -1,10 +1,10 @@
 {
   "ecmaVersion": 5,
   "plugins": {
-    "guess-types": {
+    "outline": {
       
     },
-    "outline": {
+    "node": {
       
     },
     "browser-extension": {
